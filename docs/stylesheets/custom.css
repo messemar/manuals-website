@@ -1,0 +1,51 @@
+/* Import Panton font */
+@import url('https://fonts.googleapis.com/css2?family=Panton:wght@300;400;600;700&display=swap');
+
+/* Set Panton as the primary font */
+:root {
+  --md-text-font: "Panton", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --md-code-font: "Roboto Mono", SFMono-Regular, Consolas, Menlo, monospace;
+}
+
+[data-md-color-scheme="default"] {
+  /* Light mode colors */
+  --md-primary-fg-color: #7C2D8B; /* Lila */
+  --md-primary-fg-color--light: #E53A7A; /* Pink */
+  --md-primary-fg-color--dark: #7C2D8B;
+  --md-accent-fg-color: #F89E37; /* Orange */
+  --md-accent-fg-color--transparent: rgba(248, 158, 55, 0.1);
+}
+
+[data-md-color-scheme="slate"] {
+  /* Dark mode colors */
+  --md-primary-fg-color: #E53A7A; /* Pink */
+  --md-primary-fg-color--light: #F89E37; /* Orange */
+  --md-primary-fg-color--dark: #7C2D8B; /* Lila */
+  --md-accent-fg-color: #F89E37; /* Orange */
+  --md-accent-fg-color--transparent: rgba(248, 158, 55, 0.1);
+}
+
+/* Make navigation tab items thicker */
+.md-tabs__item {
+  font-weight: 600; /* Make tab navigation items thicker */
+}
+
+.md-tabs__link {
+  font-weight: 600; /* Make tab navigation links thicker */
+}
+
+/* Improve headline contrast in dark mode */
+[data-md-color-scheme="slate"] h1,
+[data-md-color-scheme="slate"] h2,
+[data-md-color-scheme="slate"] h3,
+[data-md-color-scheme="slate"] h4,
+[data-md-color-scheme="slate"] h5,
+[data-md-color-scheme="slate"] h6 {
+  color: #ffffff; /* Pure white for better contrast in dark mode */
+}
+
+/* Fix vertical alignment of inline icons in Firefox compared to Chrome */
+.md-typeset .emojione, .md-typeset .gemoji, .md-typeset .twemoji {
+  vertical-align: middle;
+  margin-top: -0.2em;
+}
