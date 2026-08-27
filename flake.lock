@@ -1,16 +1,16 @@
 {
   "nodes": {
-    "ctrl-os24-05": {
+    "cyberus-linux24-05": {
       "locked": {
-        "lastModified": 1764666729,
-        "narHash": "sha256-EQdQ1NElbHLnueh7yKblzebNE7LVJDoOAZYZR/nnQ4s=",
-        "owner": "cyberus-ctrl-os",
+        "lastModified": 1782996554,
+        "narHash": "sha256-tEzoI3ou9BJnHhWnBclrvOQBfSXxQ58KNm5wG3oZM1M=",
+        "owner": "cyberus-linux",
         "repo": "nixpkgs",
-        "rev": "67493e73b548953f66484005c6fcd8af90798d03",
+        "rev": "efe1f80eaebc49e4aeed1733d8502bdf7536b3b2",
         "type": "github"
       },
       "original": {
-        "owner": "cyberus-ctrl-os",
+        "owner": "cyberus-linux",
         "ref": "ctrlos-24.05",
         "repo": "nixpkgs",
         "type": "github"
@@ -126,7 +126,7 @@
     },
     "root": {
       "inputs": {
-        "ctrl-os24-05": "ctrl-os24-05",
+        "cyberus-linux24-05": "cyberus-linux24-05",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "preCommitHooksNix": "preCommitHooksNix"

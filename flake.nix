@@ -1,10 +1,10 @@
 {
-  description = "A flake to build the CTRL-OS Manual, based on the original sources";
+  description = "A flake to build the Cyberus Linux Manual, based on the original sources";
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    ctrl-os24-05.url = "github:cyberus-ctrl-os/nixpkgs?ref=ctrlos-24.05";
+    cyberus-linux24-05.url = "github:cyberus-linux/nixpkgs?ref=ctrlos-24.05";
     preCommitHooksNix = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,13 +40,13 @@
           packages = {
             manualWebsite =
               let
-                release-24-05 = "${inputs.ctrl-os24-05.lib.trivial.release}";
-                release-dir-24-05 = "ctrl-os-${release-24-05}";
+                release-24-05 = "${inputs.cyberus-linux24-05.lib.trivial.release}";
+                release-dir-24-05 = "cyberus-linux-${release-24-05}";
                 mkdocsConfig = (pkgs.formats.yaml { }).generate "mkdocs.yml" {
-                  site_name = "CTRL-OS Manuals";
-                  site_description = "Manuals for the Cyberus Technology Resilient Linux Releases";
+                  site_name = "Cyberus Linux Manuals";
+                  site_description = "Manuals for the Cyberus Linux Releases";
                   site_author = "Cyberus Technology GmbH";
-                  site_url = "https://manuals.ctrl-os.com";
+                  site_url = "https://manuals.cyberus-linux.com";
                   theme = {
                     name = "material";
                     custom_dir = "docs/overrides";
@@ -95,12 +95,12 @@
                       }
                       {
                         icon = "fontawesome/brands/github";
-                        link = "https://github.com/cyberus-technology/CTRL-OS";
+                        link = "https://github.com/Cyberus-Linux/nixpkgs";
                         name = "GitHub";
                       }
                       {
                         icon = "simple/matrix";
-                        link = "https://matrix.to/#/#ctrl-os:cyberus-technology.de";
+                        link = "https://matrix.to/#/#cyberus-linux:cyberus-technology.de";
                         name = "Matrix Chat";
                       }
                     ];
@@ -116,14 +116,14 @@
                     {
                       "Nixpkgs Manuals" = [
                         { "" = "nixpkgs-manuals.md"; }
-                        { "CTRL-OS ${release-24-05}" = "${release-dir-24-05}/nixpkgs/manual.html"; }
+                        { "Cyberus Linux ${release-24-05}" = "${release-dir-24-05}/nixpkgs/manual.html"; }
                       ];
                     }
                     {
                       "NixOS Manuals" = [
                         { "" = "nixos-manuals.md"; }
-                        { "CTRL-OS ${release-24-05} Manual" = "${release-dir-24-05}/nixos/index.html"; }
-                        { "CTRL-OS ${release-24-05} Options" = "${release-dir-24-05}/nixos/options.html"; }
+                        { "Cyberus Linux ${release-24-05} Manual" = "${release-dir-24-05}/nixos/index.html"; }
+                        { "Cyberus Linux ${release-24-05} Options" = "${release-dir-24-05}/nixos/options.html"; }
                       ];
                     }
                     { "Legal Notice" = "https://cyberus-technology.de/en/legal-notice"; }
@@ -148,12 +148,12 @@
                   mkdir -p $MANUAL_PATH
                   mkdir -p $MANUAL_PATH/nixpkgs
                   mkdir -p $MANUAL_PATH/nixos
-                  cp -vR --no-preserve=mode,ownership ${inputs.ctrl-os24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/manual.html $MANUAL_PATH/nixpkgs/
-                  cp -vR --no-preserve=mode,ownership ${inputs.ctrl-os24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/*.js $MANUAL_PATH/nixpkgs/
-                  cp -vR --no-preserve=mode,ownership ${inputs.ctrl-os24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/*.css $MANUAL_PATH/nixpkgs/
-                  cp -vR --no-preserve=mode,ownership ${inputs.ctrl-os24-05.htmlDocs.nixosManual}/share/doc/nixos/*.html $MANUAL_PATH/nixos/
-                  cp -vR --no-preserve=mode,ownership ${inputs.ctrl-os24-05.htmlDocs.nixosManual}/share/doc/nixos/*.js $MANUAL_PATH/nixos/
-                  cp -vR --no-preserve=mode,ownership ${inputs.ctrl-os24-05.htmlDocs.nixosManual}/share/doc/nixos/*.css $MANUAL_PATH/nixos/
+                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/manual.html $MANUAL_PATH/nixpkgs/
+                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/*.js $MANUAL_PATH/nixpkgs/
+                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/*.css $MANUAL_PATH/nixpkgs/
+                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixosManual}/share/doc/nixos/*.html $MANUAL_PATH/nixos/
+                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixosManual}/share/doc/nixos/*.js $MANUAL_PATH/nixos/
+                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixosManual}/share/doc/nixos/*.css $MANUAL_PATH/nixos/
 
                   # Adding the tracking to the static websites
                   pushd $MANUAL_PATH
