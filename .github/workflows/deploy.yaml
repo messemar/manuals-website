@@ -15,7 +15,7 @@ jobs:
             keep-env-derivations = true
             keep-outputs = true
             extra-trusted-public-keys = ctrl-os:baPzGxj33zp/P+GAIJXsr8ss9Law+qEEFViX1+flbv8=
-            extra-substituters = https://cache.ctrl-os.com/
+            extra-substituters = https://cache.cyberus-linux.com/
       - name: Restore the nix store if available
         uses: nix-community/cache-nix-action/restore@v6
         id: nix-cache-restore
