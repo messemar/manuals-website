@@ -1,1 +1,1 @@
-In this repository, we build the manuals of https://manuals.ctrl-os.com.
+In this repository, we build the manuals of https://manuals.cyberus-linux.com.
