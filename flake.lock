@@ -1,19 +1,15 @@
 {
   "nodes": {
-    "cyberus-linux24-05": {
+    "cyberus-linux-26.05": {
       "locked": {
-        "lastModified": 1782996554,
-        "narHash": "sha256-tEzoI3ou9BJnHhWnBclrvOQBfSXxQ58KNm5wG3oZM1M=",
-        "owner": "cyberus-linux",
-        "repo": "nixpkgs",
-        "rev": "efe1f80eaebc49e4aeed1733d8502bdf7536b3b2",
-        "type": "github"
+        "lastModified": 315532800,
+        "narHash": "sha256-pk/c4jpdiAecMU2UcDxi/06COtmIrRQTP/N4awdfbYs=",
+        "type": "tarball",
+        "url": "https://channels.ctrl-os.com/permanent/ctrlos-f37d7c81e0d7065e71e8e33e79b5ebd12acdc3bd.tar.xz"
       },
       "original": {
-        "owner": "cyberus-linux",
-        "ref": "ctrlos-24.05",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://channels.cyberus-linux.com/channel/cyberus-linux-26.05.tar.xz"
       }
     },
     "flake-compat": {
@@ -122,7 +118,7 @@
     },
     "root": {
       "inputs": {
-        "cyberus-linux24-05": "cyberus-linux24-05",
+        "cyberus-linux-26.05": "cyberus-linux-26.05",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "preCommitHooksNix": "preCommitHooksNix"

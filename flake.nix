@@ -4,7 +4,7 @@
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "https://channels.cyberus-linux.com/channel/cyberus-linux-26.05.tar.xz";
-    cyberus-linux24-05.url = "github:cyberus-linux/nixpkgs?ref=ctrlos-24.05";
+    "cyberus-linux-26.05".url = "https://channels.cyberus-linux.com/channel/cyberus-linux-26.05.tar.xz";
     preCommitHooksNix = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,8 +40,17 @@
           packages = {
             manualWebsite =
               let
-                release-24-05 = "${inputs.cyberus-linux24-05.lib.trivial.release}";
-                release-dir-24-05 = "cyberus-linux-${release-24-05}";
+                inherit (inputs."cyberus-linux-26.05".lib.trivial)
+                  release
+                  ;
+                inherit (inputs."cyberus-linux-26.05")
+                  htmlDocs
+                  ;
+                nixpkgsManual = htmlDocs.nixpkgsManual.${system};
+                nixosManual = htmlDocs.nixosManual.${system};
+
+                slug = "cyberus-linux-${release}";
+
                 mkdocsConfig = (pkgs.formats.yaml { }).generate "mkdocs.yml" {
                   site_name = "Cyberus Linux Manuals";
                   site_description = "Manuals for the Cyberus Linux Releases";
@@ -116,14 +125,14 @@
                     {
                       "Nixpkgs Manuals" = [
                         { "" = "nixpkgs-manuals.md"; }
-                        { "Cyberus Linux ${release-24-05}" = "${release-dir-24-05}/nixpkgs/manual.html"; }
+                        { "Cyberus Linux ${release}" = "${slug}/nixpkgs/manual.html"; }
                       ];
                     }
                     {
                       "NixOS Manuals" = [
                         { "" = "nixos-manuals.md"; }
-                        { "Cyberus Linux ${release-24-05} Manual" = "${release-dir-24-05}/nixos/index.html"; }
-                        { "Cyberus Linux ${release-24-05} Options" = "${release-dir-24-05}/nixos/options.html"; }
+                        { "Cyberus Linux ${release} Manual" = "${slug}/nixos/index.html"; }
+                        { "Cyberus Linux ${release} Options" = "${slug}/nixos/options.html"; }
                       ];
                     }
                     { "Legal Notice" = "https://cyberus-technology.de/en/legal-notice"; }
@@ -144,16 +153,16 @@
                   mkdir -p $out
                   cp -vr --no-preserve=mode,ownership "$src" docs
                   cp -v ${mkdocsConfig} mkdocs.yml
-                  MANUAL_PATH=docs/${release-dir-24-05}
+                  MANUAL_PATH=docs/${slug}
                   mkdir -p $MANUAL_PATH
                   mkdir -p $MANUAL_PATH/nixpkgs
                   mkdir -p $MANUAL_PATH/nixos
-                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/manual.html $MANUAL_PATH/nixpkgs/
-                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/*.js $MANUAL_PATH/nixpkgs/
-                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixpkgsManual}/share/doc/nixpkgs/*.css $MANUAL_PATH/nixpkgs/
-                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixosManual}/share/doc/nixos/*.html $MANUAL_PATH/nixos/
-                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixosManual}/share/doc/nixos/*.js $MANUAL_PATH/nixos/
-                  cp -vR --no-preserve=mode,ownership ${inputs.cyberus-linux24-05.htmlDocs.nixosManual}/share/doc/nixos/*.css $MANUAL_PATH/nixos/
+                  cp -vR --no-preserve=mode,ownership ${nixpkgsManual}/share/doc/nixpkgs/manual.html $MANUAL_PATH/nixpkgs/
+                  cp -vR --no-preserve=mode,ownership ${nixpkgsManual}/share/doc/nixpkgs/*.js $MANUAL_PATH/nixpkgs/
+                  cp -vR --no-preserve=mode,ownership ${nixpkgsManual}/share/doc/nixpkgs/*.css $MANUAL_PATH/nixpkgs/
+                  cp -vR --no-preserve=mode,ownership ${nixosManual}/share/doc/nixos/*.html $MANUAL_PATH/nixos/
+                  cp -vR --no-preserve=mode,ownership ${nixosManual}/share/doc/nixos/*.js $MANUAL_PATH/nixos/
+                  cp -vR --no-preserve=mode,ownership ${nixosManual}/share/doc/nixos/*.css $MANUAL_PATH/nixos/
 
                   # Adding the tracking to the static websites
                   pushd $MANUAL_PATH
