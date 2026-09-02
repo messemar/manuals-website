@@ -3,7 +3,7 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "https://channels.cyberus-linux.com/channel/cyberus-linux-26.05.tar.xz";
     cyberus-linux24-05.url = "github:cyberus-linux/nixpkgs?ref=ctrlos-24.05";
     preCommitHooksNix = {
       url = "github:cachix/git-hooks.nix";
